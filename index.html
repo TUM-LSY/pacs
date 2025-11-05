@@ -409,248 +409,219 @@
 <!-- End How -->
 
 <!-- Videos -->
-<section class="section hero is-light">
+<section class="section hero is-light" id="examples">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-centered">
         <h2 class="title is-3">Examples</h2>
         <div class="content has-text-justified">
-          <!-- Text -->
           <p>
-            The videos below show example rollouts of our real-world tasks.
+            The videos below show example rollouts of our real-world tasks
+            for the baseline policy, a CBF-based shield, and our proposed PACS method.
           </p>
         </div>
-        <div style="display: flex; justify-content: center;">
-          <span class="link-block hide-on-mobile" style="width:auto; margin-bottom:2em;">
-            <a id="play-all-videos"
-               href="javascript:void(0);"
-               class="button is-normal is-link is-light"
-               style="color: #3070B3;">
-              <span class="icon">
-                <i class="fas fa-play"></i>
-              </span>
-              <span>Play All Videos</span>
-            </a>
-          </span>
-        </div>
-        <div class="columns is-centered landscape-grid" data-landscape-columns="2">
-          <div class="column is-half">
+
+        <!-- SORTING -->
+        <h3 class="title is-4" style="margin-top:0.5em;">Sorting</h3>
+        <div id="row-sorting" class="columns is-centered landscape-grid" data-landscape-columns="3">
+          <div class="column is-one-third">
             <div class="video-container hover-controls">
               <video class="sync-video" width="100%" height="315" preload="metadata"
-                style="background-color: #f0f0f0;"
-                muted playsinline webkit-playsinline>
-                <source src="static/videos/sorting.mp4" type="video/mp4">
-                Your browser does not support the video tag.
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/unsafe_sorting.mp4" type="video/mp4">
               </video>
-              <p class="has-text-centered" style="font-weight:bold;">Sorting</p>
+              <p class="has-text-centered" style="font-weight:bold;">Baseline</p>
             </div>
           </div>
-          <div class="column is-half">
+          <div class="column is-one-third">
             <div class="video-container hover-controls">
               <video class="sync-video" width="100%" height="315" preload="metadata"
-                style="background-color: #f0f0f0;"
-                muted playsinline webkit-playsinline>
-                <source src="static/videos/handover.mp4" type="video/mp4">
-                Your browser does not support the video tag.
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/cbf_sorting.mp4" type="video/mp4">
               </video>
-              <p class="has-text-centered" style="font-weight:bold;">Handover</p>
+              <p class="has-text-centered" style="font-weight:bold;">CBF</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/safe_sorting.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">PACS</p>
             </div>
           </div>
         </div>
-        <style>
-        .video-container {
-          position: relative;
-          width: 100%;
-          padding-bottom: 0%;
-          margin-bottom: 0em;
-        }
-        .video-container iframe {
-          position: absolute;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-        }
-        /* Hide controls by default, show on hover/focus */
-        .hover-controls video::-webkit-media-controls {
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.2s;
-        }
-        .hover-controls:hover video::-webkit-media-controls,
-        .hover-controls:focus-within video::-webkit-media-controls {
-          opacity: 1;
-          pointer-events: auto;
-        }
-        /* For Firefox */
-        .hover-controls video::-moz-media-controls {
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.2s;
-        }
-        .hover-controls:hover video::-moz-media-controls,
-        .hover-controls:focus-within video::-moz-media-controls {
-          opacity: 1;
-          pointer-events: auto;
-        }
-        @media screen and (max-width: 900px) and (orientation: landscape) {
-          .landscape-grid {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-          }
-          .landscape-grid[data-landscape-columns="2"] > .column {
-            flex: 0 0 50% !important;
-            max-width: 50% !important;
-            width: 50% !important;
-          }
-          .landscape-grid[data-landscape-columns="3"] > .column {
-            flex: 0 0 33.3333% !important;
-            max-width: 33.3333% !important;
-            width: 33.3333% !important;
-          }
-          .landscape-grid[data-landscape-columns="4"] > .column {
-            flex: 0 0 25% !important;
-            max-width: 25% !important;
-            width: 25% !important;
-          }
-        }
-        </style>
-        <script>
-        document.querySelectorAll('.hover-controls video').forEach(function(video) {
-          video.controls = false;
-          video.parentElement.addEventListener('mouseenter', function() {
-            video.controls = true;
-          });
-          video.parentElement.addEventListener('mouseleave', function() {
-            if (!video.paused && !video.ended) return;
-            video.controls = false;
-          });
-          video.addEventListener('focus', function() {
-            video.controls = true;
-          });
-          video.addEventListener('blur', function() {
-            if (!video.paused && !video.ended) return;
-            video.controls = false;
-          });
-        });
-        </script>
-        <script>
-        // Play all videos in sync when button is clicked
-        document.getElementById('play-all-videos').onclick = function() {
-          var videos = document.querySelectorAll('.sync-video');
-          videos.forEach(function(video) {
-            video.currentTime = 0;
-            video.play();
-          });
-        };
-        </script>
-        <div style="margin-top:2em;">
-          <a href="javascript:void(0);" id="show-more-videos-btn" class="external-link button is-normal is-rounded is-dark pub-btn" style="text-decoration:none;">
-            More Videos
+        <div style="display:flex;justify-content:center;margin:0.5em 0 1.25em;">
+          <a href="javascript:void(0);"
+             class="button is-normal is-link is-light"
+             style="color:#3070B3;"
+             onclick="playRowVideos('row-sorting')">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span>Play All</span>
           </a>
         </div>
-        <div id="extra-videos" style="display:none;">
-          <section class="section">
-            <div class="container is-max-desktop">
-              <!-- <h2 class="title is-4 has-text-centered">Bla</h2>
-              <div class="content has-text-justified">
-                Text
-                <p>
-                  Bla
-                </p>
-              </div> -->
-              <div style="display: flex; justify-content: center; margin-bottom: 1em;">
-                <span class="link-block" style="width:auto;">
-                  <a id="play-all-videos"
-                     href="javascript:void(0);"
-                     class="button is-normal is-link is-light"
-                     style="color: #3070B3;">
-                    <span class="icon">
-                      <i class="fas fa-play"></i>
-                    </span>
-                    <span>Play All Videos</span>
-                  </a>
-                </span>
-              </div>
-              <div class="columns is-centered landscape-grid" data-landscape-columns="2">
-                <div class="column is-half">
-                  <div class="video-container hover-controls">
-                    <video class="sync-video" width="100%" height="315" preload="metadata"
-                      style="background-color: #f0f0f0;"
-                      muted playsinline webkit-playsinline>
-                      <source src="static/videos/feeding.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
-                    <p class="has-text-centered" style="font-weight:bold;">Feeding</p>
-                  </div>
-                </div>
 
-              </div>
+        <!-- HANDOVER -->
+        <h3 class="title is-4" style="margin-top:0.5em;">Handover</h3>
+        <div id="row-handover" class="columns is-centered landscape-grid" data-landscape-columns="2">
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/unsafe_handover.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">Baseline</p>
             </div>
-            <style>
-              /* Hide controls by default, show on hover */
-              .hover-controls video::-webkit-media-controls {
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.2s;
-              }
-              .hover-controls:hover video::-webkit-media-controls,
-              .hover-controls:focus-within video::-webkit-media-controls {
-                opacity: 1;
-                pointer-events: auto;
-              }
-              /* For Firefox */
-              .hover-controls video::-moz-media-controls {
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.2s;
-              }
-              .hover-controls:hover video::-moz-media-controls,
-              .hover-controls:focus-within video::-moz-media-controls {
-                opacity: 1;
-                pointer-events: auto;
-              }
-            </style>
-            <script>
-            // Play all videos
-              document.getElementById('play-all-videos').onclick = function() {
-                var videos = document.querySelectorAll('.video-container video');
-                videos.forEach(function(video) {
-                  video.currentTime = 0;
-                  video.play();
-                });
-              };
-
-              // JS fallback for hiding controls if pseudo-elements are not supported
-              document.querySelectorAll('.hover-controls video').forEach(function(video) {
-                video.controls = false;
-                video.parentElement.addEventListener('mouseenter', function() {
-                  video.controls = true;
-                });
-                video.parentElement.addEventListener('mouseleave', function() {
-                  if (!video.paused && !video.ended) return; // keep controls if playing
-                  video.controls = false;
-                });
-                // Also show controls on keyboard focus for accessibility
-                video.addEventListener('focus', function() {
-                  video.controls = true;
-                });
-                video.addEventListener('blur', function() {
-                  if (!video.paused && !video.ended) return;
-                  video.controls = false;
-                });
-              });
-            </script>
-          </section>
-
           </div>
-          <script>
-            document.getElementById('show-more-videos-btn').onclick = function() {
-              var extra = document.getElementById('extra-videos');
-              extra.style.display = 'block';
-              this.style.display = 'none';
-              // Optionally scroll to the new content
-              extra.scrollIntoView({behavior: 'smooth'});
-            };
-          </script>
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/safe_handover.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">PACS</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;margin:0.5em 0 1.25em;">
+          <a href="javascript:void(0);"
+             class="button is-normal is-link is-light"
+             style="color:#3070B3;"
+             onclick="playRowVideos('row-handover')">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span>Play All</span>
+          </a>
+        </div>
+
+        <!-- FEEDING -->
+        <h3 class="title is-4" style="margin-top:0.5em;">Feeding</h3>
+        <div id="row-feeding" class="columns is-centered landscape-grid" data-landscape-columns="2">
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/unsafe_feeding.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">Baseline</p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/safe_feeding.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">PACS</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;margin:0.5em 0 1.25em;">
+          <a href="javascript:void(0);"
+             class="button is-normal is-link is-light"
+             style="color:#3070B3;"
+             onclick="playRowVideos('row-feeding')">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span>Play All</span>
+          </a>
+        </div>
+
+        <!-- SPEED TEST -->
+        <h3 class="title is-4" style="margin-top:0.5em;">Speed Test</h3>
+        <div id="row-speed" class="columns is-centered landscape-grid" data-landscape-columns="2">
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/base_sorting.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">Baseline</p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/pacs_sorting.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">PACS</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;margin:0.5em 0 0;">
+          <a href="javascript:void(0);"
+             class="button is-normal is-link is-light"
+             style="color:#3070B3;"
+             onclick="playRowVideos('row-speed')">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span>Play All</span>
+          </a>
+        </div>
+
+        <!-- Shared styles -->
+        <style>
+          .video-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 0em;
+          }
+          .hover-controls video::-webkit-media-controls {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+          }
+          .hover-controls:hover video::-webkit-media-controls,
+          .hover-controls:focus-within video::-webkit-media-controls {
+            opacity: 1;
+            pointer-events: auto;
+          }
+          .hover-controls video::-moz-media-controls {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+          }
+          .hover-controls:hover video::-moz-media-controls,
+          .hover-controls:focus-within video::-moz-media-controls {
+            opacity: 1;
+            pointer-events: auto;
+          }
+          @media screen and (max-width:900px) and (orientation:landscape){
+            .landscape-grid{display:flex!important;flex-wrap:nowrap!important;}
+            .landscape-grid[data-landscape-columns="2"]>.column{flex:0 0 50%!important;max-width:50%!important;}
+            .landscape-grid[data-landscape-columns="3"]>.column{flex:0 0 33.3333%!important;max-width:33.3333%!important;}
+          }
+        </style>
+
+        <!-- JS: hover controls + per-row play-all -->
+        <script>
+          // Hover-based control visibility + accessibility
+          document.querySelectorAll('.hover-controls video').forEach(function(video){
+            video.controls = false;
+            var parent = video.parentElement;
+            parent.addEventListener('mouseenter',()=>{ video.controls = true; });
+            parent.addEventListener('mouseleave',()=>{
+              if(!video.paused && !video.ended) return;
+              video.controls = false;
+            });
+            video.addEventListener('focus',()=>{ video.controls = true; });
+            video.addEventListener('blur',()=>{
+              if(!video.paused && !video.ended) return;
+              video.controls = false;
+            });
+          });
+
+          // Play all videos in a given row
+          function playRowVideos(rowId){
+            var row = document.getElementById(rowId);
+            if(!row) return;
+            var vids = row.querySelectorAll('video');
+            vids.forEach(function(v){
+              v.currentTime = 0;
+              v.play();
+            });
+          }
+        </script>
+
       </div>
     </div>
   </div>
