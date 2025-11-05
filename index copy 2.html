@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta name="title" content="From Demonstrations to Safe Deployment: Path-Consistent SafetyFiltering for Diffusion Policies - Römer, Ralf; Balletshofer, Julian; Thumm, Jakob; Pavone, Marco; Schoellig, Angela P.; Althoff, Matthias">
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta name="description" content="This paper presents a novel approach to safe deployment of diffusion policies without compromising task success.">
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta name="keywords" content="robotics, imitation learning, diffusion policies, safety, human-robot-interaction">
+  <!-- TODO: List all authors -->
+  <meta name="author" content="Römer, Ralf; Balletshofer, Julian; Thumm, Jakob; Pavone, Marco; Schoellig, Angela P.; Althoff, Matthias">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta property="og:site_name" content="Learning Systems and Robotics Lab (LSY) and Cyber-Physical Systems Group (CPS), TUM">
+  <!-- TODO: Same as paper title above -->
+  <meta property="og:title" content="From Demonstrations to Safe Deployment: Path-Consistent SafetyFiltering for Diffusion Policies">
+  <!-- TODO: Same as description above -->
+  <meta property="og:description" content="This paper presents a novel approach to safe deployment of diffusion policies without compromising task success.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://tum-lsy.github.io/pacs/">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://tum-lsy.github.io/pacs/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="From Demonstrations to Safe Deployment: Path-Consistent SafetyFiltering for Diffusion Policies">
+  <meta property="article:published_time" content="2025-10-10T00:00:00.000Z">
+  <meta property="article:author" content="Römer, Ralf; Balletshofer, Julian; Thumm, Jakob; Pavone, Marco; Schoellig, Angela P.; Althoff, Matthias">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="robotics">
+  <meta property="article:tag" content="imitation learning">
+  <meta property="article:tag" content="diffusion policies">
+  <meta property="article:tag" content="safety">
+  <meta property="article:tag" content="human-robot-interaction">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="From Demonstrations to Safe Deployment: Path-Consistent SafetyFiltering for Diffusion Policies">
+  <meta name="citation_author" content="Römer, Ralf">
+  <meta name="citation_author" content="Balletshofer, Julian">
+  <meta name="citation_author" content="Thumm, Jakob">
+  <meta name="citation_author" content="Pavone, Marco">
+  <meta name="citation_author" content="Schoellig, Angela P.">
+  <meta name="citation_author" content="Althoff, Matthias">
+  <meta name="citation_publication_date" content="2025">
+  <meta name="citation_conference_title" content="todo">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/todo">
+  
+  <!-- Additional SEO, og #2563eb -->
+  <meta name="theme-color" content="#3070B3">
+  <meta name="msapplication-TileColor" content="#3070B3">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>From Demonstrations to Safe Deployment: Path-Consistent SafetyFiltering for Diffusion Policies</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "From Demonstrations to Safe Deployment: Path-Consistent SafetyFiltering for Diffusion Policies",
+    "description": "This paper presents a novel approach to safe deployment of diffusion policies without compromising task success.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Ralf Römer",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Learning Systems and Robotics Lab, Technical University of Munich"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Julian Balletshofer",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Cyber Physical Systems Group, Technical University of Munich"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Jakob Thumm",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Autonomous Systems Lab, Stanford University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Marco Pavone",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Autonomous Systems Lab, Stanford University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Angela P. Schoellig",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Learning Systems and Robotics Lab, Technical University of Munich"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Matthias Althoff",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Cyber Physical Systems Group, Technical University of Munich"
+        }
+      },
+
+    ],
+    "datePublished": "2025-10-10",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neural Information Processing Systems Foundation",
+      "url": "https://neurips.cc"
+    },
+    "url": "https://tum-lsy.github.io/pacs/",
+    "image": "https://tum-lsy.github.io/pacs/static/images/social_preview.png",
+    "keywords": ["robotics", "imitation learning", "diffusion policies", "safety", "human-robot-interaction"],
+    "abstract": "Diffusion policies (DPs) achieve state-of-the-art performance on complex manipulation tasks by learning from large-scale demonstration datasets, often spanning multiple embodiments and environments. However, they cannot guarantee safe behavior, so external safety mechanisms are needed. These, however, alter actions in ways unseen during training, causing unpredictable behavior and performance degradation. To address these problems, we propose path-consistent safety filtering (PACS) for DPs. Our approach performs path-consistent braking on a trajectory computed from the sequence of generated actions. In this way, we keep execution consistent with the policy's training distribution, maintaining the learned, task-completing behavior. To enable a real-time deployment and handle uncertainties, we verify safety using set-based reachability analysis. Our experimental evaluation in simulation and on three challenging real-world human-robot interaction tasks shows that PACS (a) provides formal safety guarantees in dynamic environments, (b) preserves task success rates, and (c) outperforms reactive safety approaches, such as control barrier functions, by up to 68% in terms of task success.",
+    "citation": "@inproceedings{pacs2025,\n  title={From Demonstrations to Safe Deployment: Path-Consistent Safety Filtering for Diffusion Policies},\n  author={Ralf R\"omer and Julian Balletshofer and Jakob Thumm and Marco Pavone and Angela P. Schoellig and Matthias Althoff},\n  booktitle={TODO},\n  year={TODO}\n}",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://tum-lsy.github.io/pacs/"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Robotics"
+      },
+      {
+        "@type": "Thing", 
+        "name": "Imitation Learning"
+      },
+      {
+        "@type": "Thing",
+        "name": "Safety"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Learning Systems and Robotics Lab, Technical University of Munich",
+    "url": "https://www.dynsyslab.org",
+    "logo": "https://tum-lsy.github.io/pacs/static/images/learnsyslab_logo.ico",
+    "sameAs": [
+      "https://www.linkedin.com/company/learnsyslab",
+      "https://github.com/utiasDSL"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- TODO: Replace with your paper title -->
+            <h1 class="title is-1 publication-title">From Demonstrations to Safe Deployment: Path-Consistent Safety Filtering for Diffusion Policies</h1>
+
+            <!-- TODO: Replace with your paper venue and year -->
+            <!-- <div class="is-flex is-justify-content-center is-align-items-center" style="margin-bottom: 1em;">
+              <img src="static/images/NeurIPS-logo.svg" alt="NeurIPS Logo" style="height:5em; margin-right:0.5em;">
+              <span class="is-size-4 has-text-weight-bold" style="vertical-align:middle; color:#68448B;">NeurIPS 2025</span>
+            </div> -->
+
+            <div class="is-size-5 publication-authors">
+              <!-- TODO: Replace with your paper authors and their personal links -->
+              <span class="author-block">
+                <a href="https://ralfroemer99.github.io" target="_blank">Ralf Römer</a><sup>*,1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/julian-balletshofer-6861641b8/" target="_blank">Julian Balletshofer</a><sup>*,1</sup>,</span>
+              <span class="author-block">
+                <a href="https://jakob-thumm.com/" target="_blank">Jakob Thumm</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/adriankobras/" target="_blank">Marco Pavone</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.dynsyslab.org/prof-angela-schoellig/" target="_blank">Angela P. Schoellig</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.ce.cit.tum.de/cps/home/" target="_blank">Matthias Althoff</a><sup>1</sup></span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block"><sup>1</sup> Department of Computer Engineering, Technical University of Munich</span>
+                <span class="author-block"><sup>2</sup> Department of Aeronautics and Astronautics, Stanford University</span>
+                <span class="eql-cntrb"><small><br><sup>*</sup>Equal Contribution</small></span>
+              </div>
+
+              <div class="is-flex is-justify-content-center is-align-items-center" style="gap: 0.5em; margin: 1em 0;">
+                <!-- <img src="static/images/learnsyslab_logo.png" alt="LSY" style="height:4em;"> -->
+                <img src="static/images/Logo_of_the_Technical_University_of_Munich.svg" alt="TUM" style="height:3em;">
+                <img src="static/images/stanford_logo.png" alt="Stanford" style="height:4em;">
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5em;">
+                  <span class="link-block" style="width:auto;">
+                    <a href="https://arxiv.org/pdf/todo" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark pub-btn">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <span class="link-block" style="width:auto;">
+                    <a href="https://github.com/todo" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark pub-btn">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                  <span class="link-block" style="width:auto;">
+                    <a href="https://arxiv.org/abs/todo" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark pub-btn">
+                      <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>arXiv</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <style>
+              @media (max-width: 600px) {
+                .publication-links {
+                  flex-direction: column !important;
+                  align-items: center !important;
+                }
+                .publication-links .link-block {
+                  width: 100% !important;
+                  display: flex;
+                  justify-content: center;
+                  margin-bottom: 0.5em;
+                }
+                .publication-links .pub-btn {
+                  width: 100% !important;
+                  justify-content: center;
+                }
+              }
+              </style>
+              </style>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light" id="examples">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+            <strong>Diffusion policies (DPs)</strong> achieve state-of-the-art performance on complex manipulation tasks by learning from large-scale demonstration datasets, often spanning multiple embodiments and environments.
+            However, they <strong>cannot guarantee safe behavior</strong>, so external safety mechanisms are needed.
+            These, however, alter actions in ways unseen during training, causing <strong>unpredictable behavior and performance degradation</strong>.
+            To address these problems, we propose <u>pa</u>th-<u>c</u>onsistent <u>s</u>afety filtering (PACS) for DPs.
+            Our approach performs <strong>path-consistent braking</strong> on a trajectory computed from the sequence of generated actions.
+            In this way, we keep execution consistent with the policy's training distribution, maintaining the learned, task-completing behavior.
+            To enable a real-time deployment and handle uncertainties, we verify safety using set-based reachability analysis.
+            Our experimental evaluation in simulation and on three challenging real-world human-robot interaction tasks shows that PACS (a) provides <strong>formal safety guarantees</strong> in dynamic environments, (b) preserves task success rates, and (c) <strong>outperforms reactive safety approaches</strong>, such as control barrier functions, by up to 68% in terms of task success.
+          </p>
+        </div>
+      </div>
+    </div>
+    <style>
+    @media (max-width: 600px), (max-width: 900px) and (orientation: landscape) {
+      .robot-pretzel-img {
+      justify-content: center !important;
+      margin: 0 !important;
+      }
+    }
+    </style>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Why -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="columns is-centered is-vcentered" style="align-items: flex-start; margin-top: 1em;">
+          <figure style="display: flex; flex-direction: column; align-items: center;">
+            <img src="static/images/motivation.png" alt="Motivation" style="height:10cm; object-fit:contain;">
+            <!-- <figcaption style="margin-top:0.5em;">Figure 1: </figcaption> -->
+          </figure>
+        </div>
+        <div class="content has-text-justified">
+          <!-- Text -->
+          <p>
+            Recent advances in imitation learning with diffusion policies, including vision-language-action models (VLAs), have enabled robots to solve increasingly complex, long-horizon tasks.
+            However, deploying DPs in dynamic environments with moving objects requires safeguarding mechanisms, 
+            as the <strong>intended policy actions may be unsafe</strong>. Reactive strategies, such as control barrier functions, often drive the agent into <strong>out-of-distribution (OOD)
+            states</strong> not seen during training, leading to <strong>unpredictable behavior</strong>. We propose that safety mechanisms for DPs should remain <strong>consistent with the robot’s
+            intended path</strong> to avoid out-of-distribution states and preserve high task success rates.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Why -->
+
+<!-- How -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop has-text-centered">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="columns is-centered is-vcentered" style="align-items: flex-start; margin-top: 1em;">
+          <figure style="display: flex; flex-direction: column; align-items: center;">
+            <img src="static/images/overview.png" alt="Method" style="width:100%; object-fit:contain;">
+            <!-- <figcaption style="margin-top:0.5em;">Figure 1: </figcaption> -->
+          </figure>
+        </div>
+        <!-- <img src="static/images/overview.png" alt="Shield illustration" style="width:100%; height:auto; margin-bottom:2em;"> -->
+        <div class="content has-text-justified">
+          <!-- Text -->
+          <p>
+            The policy, conditioned on visual observations and proprioceptive inputs,
+            generates action chunks that are transformed into a sequence of desired waypoints. From these waypoints, we compute a kinematically and dynamically
+            feasible intended trajectory. PACS continuously monitors this trajectory and applies high-frequency safety filtering using reachability analysis to enforce
+            task-specific safety constraints (e.g., collision avoidance or impact force limits).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End How -->
+
+<!-- Videos -->
+<section class="section hero is-light" id="examples">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <h2 class="title is-3">Examples</h2>
+        <div class="content has-text-justified">
+          <p>
+            The videos below show example rollouts of our real-world tasks
+            for the baseline policy, a CBF-based shield, and our proposed PACS method.
+          </p>
+        </div>
+
+        <!-- SORTING -->
+        <h3 class="title is-4" style="margin-top:0.5em;">Sorting</h3>
+        <div id="row-sorting" class="columns is-centered landscape-grid" data-landscape-columns="3">
+          <div class="column is-one-third">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/unsafe_sorting.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">Baseline</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/cbf_sorting.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">CBF</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/safe_sorting.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">PACS</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;margin:0.5em 0 1.25em;">
+          <a href="javascript:void(0);"
+             class="button is-normal is-link is-light"
+             style="color:#3070B3;"
+             onclick="playRowVideos('row-sorting')">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span>Play All</span>
+          </a>
+        </div>
+
+        <!-- HANDOVER -->
+        <h3 class="title is-4" style="margin-top:0.5em;">Handover</h3>
+        <div id="row-handover" class="columns is-centered landscape-grid" data-landscape-columns="2">
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/unsafe_handover.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">Baseline</p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/safe_handover.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">PACS</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;margin:0.5em 0 1.25em;">
+          <a href="javascript:void(0);"
+             class="button is-normal is-link is-light"
+             style="color:#3070B3;"
+             onclick="playRowVideos('row-handover')">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span>Play All</span>
+          </a>
+        </div>
+
+        <!-- FEEDING -->
+        <h3 class="title is-4" style="margin-top:0.5em;">Feeding</h3>
+        <div id="row-feeding" class="columns is-centered landscape-grid" data-landscape-columns="2">
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/unsafe_feeding.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">Baseline</p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/safe_feeding.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">PACS</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;margin:0.5em 0 1.25em;">
+          <a href="javascript:void(0);"
+             class="button is-normal is-link is-light"
+             style="color:#3070B3;"
+             onclick="playRowVideos('row-feeding')">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span>Play All</span>
+          </a>
+        </div>
+
+        <!-- SPEED TEST -->
+        <h3 class="title is-4" style="margin-top:0.5em;">Speed Test</h3>
+        <div id="row-speed" class="columns is-centered landscape-grid" data-landscape-columns="2">
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/base_sorting.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">Baseline</p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="video-container hover-controls">
+              <video class="sync-video" width="100%" height="315" preload="metadata"
+                     style="background-color:#f0f0f0;" muted playsinline webkit-playsinline>
+                <source src="static/videos/pacs_sorting.mp4" type="video/mp4">
+              </video>
+              <p class="has-text-centered" style="font-weight:bold;">PACS</p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;margin:0.5em 0 0;">
+          <a href="javascript:void(0);"
+             class="button is-normal is-link is-light"
+             style="color:#3070B3;"
+             onclick="playRowVideos('row-speed')">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span>Play All</span>
+          </a>
+        </div>
+
+        <!-- Shared styles -->
+        <style>
+          .video-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 0em;
+          }
+          .hover-controls video::-webkit-media-controls {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+          }
+          .hover-controls:hover video::-webkit-media-controls,
+          .hover-controls:focus-within video::-webkit-media-controls {
+            opacity: 1;
+            pointer-events: auto;
+          }
+          .hover-controls video::-moz-media-controls {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+          }
+          .hover-controls:hover video::-moz-media-controls,
+          .hover-controls:focus-within video::-moz-media-controls {
+            opacity: 1;
+            pointer-events: auto;
+          }
+          @media screen and (max-width:900px) and (orientation:landscape){
+            .landscape-grid{display:flex!important;flex-wrap:nowrap!important;}
+            .landscape-grid[data-landscape-columns="2"]>.column{flex:0 0 50%!important;max-width:50%!important;}
+            .landscape-grid[data-landscape-columns="3"]>.column{flex:0 0 33.3333%!important;max-width:33.3333%!important;}
+          }
+        </style>
+
+        <!-- JS: hover controls + per-row play-all -->
+        <script>
+          // Hover-based control visibility + accessibility
+          document.querySelectorAll('.hover-controls video').forEach(function(video){
+            video.controls = false;
+            var parent = video.parentElement;
+            parent.addEventListener('mouseenter',()=>{ video.controls = true; });
+            parent.addEventListener('mouseleave',()=>{
+              if(!video.paused && !video.ended) return;
+              video.controls = false;
+            });
+            video.addEventListener('focus',()=>{ video.controls = true; });
+            video.addEventListener('blur',()=>{
+              if(!video.paused && !video.ended) return;
+              video.controls = false;
+            });
+          });
+
+          // Play all videos in a given row
+          function playRowVideos(rowId){
+            var row = document.getElementById(rowId);
+            if(!row) return;
+            var vids = row.querySelectorAll('video');
+            vids.forEach(function(v){
+              v.currentTime = 0;
+              v.play();
+            });
+          }
+        </script>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Videos -->
+
+<!-- Results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+        <div class="columns is-centered is-vcentered" style="align-items: flex-start; margin-top: 1em;">
+          <figure style="display: flex; flex-direction: column; align-items: center;">
+            <img src="static/images/sorting_paths.png" alt="Sorting Paths" style="width:60%; object-fit:contain;">
+          </figure>
+        </div> 
+        <div class="content has-text-justified">
+          <!-- Text -->
+          <p>
+            End effector paths for the SORTING task. The color intensity of the
+            trajectories indicates the velocity, and the intensity of the shaded grey areas
+            visualizes the training distribution. Our safety filter slows down the policy
+            without leaving the desired path when the human is nearby. In contrast, the
+            control barrier function (CBF) pushes the robot away from unsafe states,
+            which often leads to out-of-distribution (OOD) states from which the policy
+            cannot recover.
+          </p>
+        </div>
+        <div class="columns is-multiline is-centered" style="margin-top: 1em;">
+          <div class="column is-half-tablet is-half-desktop">
+            <figure style="display:flex;flex-direction:column;align-items:center;">
+              <img src="static/images/results_sim.png" alt="Robomimic results" style="width:100%; max-width:600px; object-fit:contain;">
+              <figcaption style="margin-top:0.5em;">Robomimic task success rate results on 100 rollouts. PACS achieves higher success rates than other safety filters.</figcaption>
+            </figure>
+          </div>
+
+          <div class="column is-half-tablet is-half-desktop">
+            <figure style="display:flex;flex-direction:column;align-items:center;">
+              <img src="static/images/results_real.png" alt="Real-world results" style="width:100%; max-width:600px; object-fit:contain;">
+              <figcaption style="margin-top:0.5em;">Impact of safeguarding in our real-world experiments. PACS guarantees safe deployment and maintains high task success, resulting in a high safe success rate.</figcaption>
+            </figure>
+          </div>
+
+          <div class="column is-half-tablet is-half-desktop">
+            <figure style="display:flex;flex-direction:column;align-items:center;">
+              <img src="static/images/results_real_speed.png" alt="Speed comparison" style="width:80%; max-width:600px; object-fit:contain;">
+              <figcaption style="margin-top:0.5em;">Baseline comparison and speed analysis for the Sorting task. PACS achieves higher task performance than CBFs and can even perform the task faster than the nominal policy.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Highlights -->
+<section class="section">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title is-3">Highlights</h2>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          PACS
+          <ul>
+            <li>is a general framework for <strong>safe deployment</strong> of action chunking-based imitation learning policies, such as DPs and VLAs,</li>
+            <li>performs path-consistent safety interventions to <strong>avoid OOD situations</strong> and <strong>maintain high task performance</strong>,</li>
+            <li>computes an <strong>intended trajectory</strong> from the action chunk and monitors it using <strong>reachability analysis</strong>,</li>
+            <li>can <strong>guarantee safety in real time</strong> and achieve high task success even on <strong>challenging real-world HRI tasks</strong>, whereas reactive safety filtering with CBFs frequently leads the policy into unrecoverable states.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Highlights -->
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths content">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <pre id="bibtex-code"><code>@inproceedings{pacs2025,
+          title={From Demonstrations to Safe Deployment: Path-Consistent Safety Filtering for Diffusion Policies},
+          author={Ralf R{\"o}mer and Julian Balletshofer and Jakob T.Ralf R\"omer and Julian Balletshofer and Jakob Thumm and Marco Pavone and Angela P. Schoellig and Matthias Althoff},
+          booktitle={TODO},
+          year={2025}
+        }</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+<!--End BibTex citation -->
+
+
+<footer class="footer">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths content">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            It is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+        <!-- Visitor Counter -->
+        <div id="visitor-count"
+             style="text-align:center; margin-top:-1.25em; margin-bottom:-2.25em; font-size:0.9em; color:#999; opacity:0; transition:opacity 0.3s;">
+          Visitors: <span id="count">–</span>
+        </div>
+        <script>
+(async () => {
+  const container = document.getElementById("visitor-count");
+  const span = document.getElementById("count");
+  const url = "https://hitscounter.dev/api/hit?output=json&url=https%3A%2F%2Ftum-lsy.github.io%2Fpacs%2F&label=Visitors&icon=arrow-right-circle-fill&color=%236ea8fe&message=&style=for-the-badge&tz=Europe%2FBerlin";
+  try {
+    const res = await fetch(url, { cache: "no-store", headers: { "Accept": "application/json" } });
+    const data = await res.json();
+    let val = null;
+    if (data) {
+      if (typeof data.total_hits === "number") val = data.total_hits;
+      else if (typeof data.today_hits === "number") val = data.today_hits;
+      else if (typeof data.count === "number") val = data.count;
+    }
+    if (typeof val === "number" && !Number.isNaN(val)) {
+      span.textContent = val.toLocaleString();
+      container.style.opacity = "1";
+    } else {
+      span.textContent = "n/a";
+      container.style.opacity = "1";
+    }
+  } catch (e) {
+    span.textContent = "error";
+    container.style.opacity = "1";
+    console.error("Visitor counter error:", e);
+  }
+})();
+        </script>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
